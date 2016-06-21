@@ -4,8 +4,10 @@ using System.Collections;
 public class changeSprite : MonoBehaviour
 {
 
-	public Sprite sprite1;	// Drag your first sprite here
-	public Sprite sprite2;	// Drag your second sprite here
+	public Sprite sprite1;
+	// Drag your first sprite here
+	public Sprite sprite2;
+	// Drag your second sprite here
 
 	private SpriteRenderer spriteRenderer;
 
@@ -35,6 +37,8 @@ public class changeSprite : MonoBehaviour
 
 	public void changeSpriteOnBtnClick ()
 	{
+
+//		Debug.Log ("Im here");
 
 		if (spriteRenderer.sprite == sprite1) { // if the spriteRenderer sprite = sprite1 then change to sprite2
 			spriteRenderer.sprite = sprite2;
