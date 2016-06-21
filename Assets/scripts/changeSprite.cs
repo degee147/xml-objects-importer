@@ -10,9 +10,6 @@ public class changeSprite : MonoBehaviour
 	public float height;
 	public float width;
 
-//	[XmlAttribute("height")]
-//	public string ht;
-//
 	public Sprite sprite1;
 	// Drag your first sprite here
 	public Sprite sprite2;
@@ -21,31 +18,15 @@ public class changeSprite : MonoBehaviour
 	private SpriteRenderer spriteRenderer;
 
 
-
 	// npc data
 	public string npcName;
 	public string npcType;
-
 
 	// chat data
 	public int maxData;
 	public int showData;
 	public string[] data;
 
-
-
-
-
-//	public Vector3 position;
-//
-//	[XmlAttribute("Position")]
-//	public string Position_Surrogate{
-//		get{ return ""; }
-//		set{ 
-//			position = new Vector3().FromString(value);
-//		}
-//	}
-//
 
 	void Start ()
 	{
@@ -100,7 +81,7 @@ public class changeSprite : MonoBehaviour
 			if(reader.IsStartElement("npc"))
 			{
 				// get attributes from npc tag
-				npcName=reader.GetAttribute("name");
+				npcName = reader.GetAttribute("name");
 				npcType = reader.GetAttribute("npcType");
 //				maxData = (int)reader.GetAttribute("entries");
 
@@ -127,7 +108,7 @@ public class changeSprite : MonoBehaviour
 
 			}
 		}
-
+ 
 
 //		Debug.Log ("ht is this: " + position);
 //		Debug.Log (color);
@@ -144,17 +125,3 @@ public class changeSprite : MonoBehaviour
 
 
 }
-
-
-//public static class Vector3Helper
-//{
-//
-//	public static Vector3 FromString(this Vector3 vector, string value){
-//		string[] temp = value.Replace(" ", "").Split(',');
-//		vector.x = float.Parse(temp[0]);
-//		vector.y = float.Parse(temp[1]);
-//		vector.z = float.Parse(temp[2]);
-//
-//		return vector;
-//	}
-//}
