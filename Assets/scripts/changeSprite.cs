@@ -3,6 +3,7 @@ using System.Collections;
 
 public class changeSprite : MonoBehaviour
 {
+
 	public Color color;
 	public float height;
 	public float width;
