@@ -45,6 +45,11 @@ public class changeSprite : MonoBehaviour
 //		Debug.Log ("Im here");
 
 		spriteRenderer.transform.localScale = new Vector3 (width, height, 0);
+
+		//can use get component to find the script and then find the value of the color attribute to get the colour 
+		//for now let's parse the xml to get the color
+
+//		Debug.Log (color);
 //		spriteRenderer.color = Color.green;
 //		GetComponent<SpriteRenderer> ().color = Color.green;
 
