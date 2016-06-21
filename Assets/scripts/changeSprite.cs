@@ -33,5 +33,11 @@ public class changeSprite : MonoBehaviour
 	}
 
 
+	public void changeSpriteonBtnClick ()
+	{
+		Debug.Log ("Im here");
+
+	}
+
 
 }
