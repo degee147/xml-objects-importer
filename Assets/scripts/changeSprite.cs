@@ -3,6 +3,9 @@ using System.Collections;
 
 public class changeSprite : MonoBehaviour
 {
+	public Color color;
+	public float height;
+	public float width;
 
 	public Sprite sprite1;
 	// Drag your first sprite here
@@ -29,6 +32,7 @@ public class changeSprite : MonoBehaviour
 	{
 		if (spriteRenderer.sprite == sprite1) { // if the spriteRenderer sprite = sprite1 then change to sprite2
 			spriteRenderer.sprite = sprite2;
+
 		} else {
 			spriteRenderer.sprite = sprite1; // otherwise change it back to sprite1
 		}
@@ -39,6 +43,10 @@ public class changeSprite : MonoBehaviour
 	{
 
 //		Debug.Log ("Im here");
+
+		spriteRenderer.transform.localScale = new Vector3 (width, height, 0);
+//		spriteRenderer.color = Color.green;
+//		GetComponent<SpriteRenderer> ().color = Color.green;
 
 		if (spriteRenderer.sprite == sprite1) { // if the spriteRenderer sprite = sprite1 then change to sprite2
 			spriteRenderer.sprite = sprite2;
