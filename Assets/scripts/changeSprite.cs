@@ -33,9 +33,14 @@ public class changeSprite : MonoBehaviour
 	}
 
 
-	public void changeSpriteonBtnClick ()
+	public void changeSpriteOnBtnClick ()
 	{
-		Debug.Log ("Im here");
+
+		if (spriteRenderer.sprite == sprite1) { // if the spriteRenderer sprite = sprite1 then change to sprite2
+			spriteRenderer.sprite = sprite2;
+		} else {
+			spriteRenderer.sprite = sprite1; // otherwise change it back to sprite1
+		}
 
 	}
 
