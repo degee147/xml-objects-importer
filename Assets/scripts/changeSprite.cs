@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using System.Xml;
+using System.IO;
 
 
 public class changeSprite : MonoBehaviour
@@ -10,8 +13,10 @@ public class changeSprite : MonoBehaviour
 	public int height;
 	public int width;
 
-	public Sprite sprite1;	// Drag your first sprite here
-	public Sprite sprite2;	// Drag your second sprite here
+	public Sprite sprite1;
+	// Drag your first sprite here
+	public Sprite sprite2;
+	// Drag your second sprite here
 
 	//private SpriteRenderer spriteRenderer;
 	private UISprite spriteUI;
@@ -60,7 +65,7 @@ public class changeSprite : MonoBehaviour
 
 
 			if (reader.IsStartElement ("width")) {
-				width =  int.Parse (reader.GetAttribute ("value"));
+				width = int.Parse (reader.GetAttribute ("value"));
 			}
 
 			if (reader.IsStartElement ("height")) {
@@ -82,13 +87,45 @@ public class changeSprite : MonoBehaviour
 		//spriteRenderer.sprite = sprite1;
 		spriteUI.spriteName = "image2";
 
-//		Debug.Log (color);
-//		spriteRenderer.color = Color.green;
-//		GetComponent<SpriteRenderer> ().color = Color.green;
+		//		Debug.Log (color);
+		//		spriteRenderer.color = Color.green;
+		//		GetComponent<SpriteRenderer> ().color = Color.green;
 
 	}
 
-	public void writeToXml(){
-		Debug.Log ("gotcha");
+	public void writeToXml ()
+	{
+		//XmlReader reader = XmlReader.Create ("Assets/Resources/xmlfile.xml");
+
+		string filepath = Application.dataPath + @"/Resources/gamexml.xml";
+		XmlDocument xmlDoc = new XmlDocument ();
+
+		if (File.Exists (filepath)) {
+
+			xmlDoc.Load (filepath);
+
+			XmlElement elmRoot = xmlDoc.DocumentElement;
+
+			elmRoot.RemoveAll (); // remove all inside the transforms node.
+
+			XmlElement elmNew = xmlDoc.CreateElement ("rotation"); // create the rotation node.
+
+			XmlElement rotation_X = xmlDoc.CreateElement ("x"); // create the x node.
+			rotation_X.InnerText = spriteUI.width.ToString(); // apply to the node text the values of the variable.
+
+			XmlElement rotation_Y = xmlDoc.CreateElement ("y"); // create the y node.
+			rotation_Y.InnerText = spriteUI.width.ToString(); // apply to the node text the values of the variable.
+
+			XmlElement rotation_Z = xmlDoc.CreateElement ("z"); // create the z node.
+			rotation_Z.InnerText = spriteUI.width.ToString(); // apply to the node text the values of the variable.
+
+			elmNew.AppendChild (rotation_X); // make the rotation node the parent.
+			elmNew.AppendChild (rotation_Y); // make the rotation node the parent.
+			elmNew.AppendChild (rotation_Z); // make the rotation node the parent.
+			elmRoot.AppendChild (elmNew); // make the transform node the parent.
+
+			xmlDoc.Save (filepath); // save file.
+
+		}
 	}
 }
