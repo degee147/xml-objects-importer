@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-	<height>150</height>
-	<width>140</width>
-	<color>Speach bubble 3</color>
-</parameters>
+<?xml version="1.0" encoding="utf-8" ?>
+<npcs>
+   <npc name="Mace" npcType="Barman" entries="3">
+      <width value="60">60</width>
+      <height value="75">75</height>
+      <color>green</color>
+   </npc>
+</npcs>
