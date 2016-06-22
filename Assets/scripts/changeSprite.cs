@@ -13,18 +13,16 @@ public class changeSprite : MonoBehaviour
 	public int height;
 	public int width;
 
-	public Sprite sprite1;
-	// Drag your first sprite here
-	public Sprite sprite2;
-	// Drag your second sprite here
+	public Sprite sprite1;	// Drag your first sprite here. Optional. This doesn't do much
+	public Sprite sprite2;	// Drag your second sprite here. Optional. This doesn't do much
 
-	private UISprite spriteUI;
+	private UISprite spriteUI; //reference to the UI Sprite Component of the Image Window object
 
 
 	void Start ()
 	{
 		spriteUI = GetComponent<UISprite> ();
-		spriteUI.spriteName = "image1";
+		spriteUI.spriteName = "image1"; //sets image to image1 sprite
 	}
 
 	void Update ()
@@ -38,7 +36,7 @@ public class changeSprite : MonoBehaviour
 	{
 		LoadFromXml ();
 
-		if (spriteUI.spriteName == "image1") { // if the spriteRenderer sprite = sprite1 then change to sprite2 etc..
+		if (spriteUI.spriteName == "image1") { // if the UI sprite = image1 then change to image2 etc..
 			spriteUI.spriteName = "image2";
 		} else if (spriteUI.spriteName == "image2") {
 			spriteUI.spriteName = "image3";
@@ -53,7 +51,7 @@ public class changeSprite : MonoBehaviour
 	public void changeSpriteOnBtnClick ()
 	{
 		LoadFromXml ();
-		spriteUI.spriteName = "image2";
+		spriteUI.spriteName = "image2"; //change to hardcoded image2 when change button is clicked
 	}
 
 	public void LoadFromXml ()
