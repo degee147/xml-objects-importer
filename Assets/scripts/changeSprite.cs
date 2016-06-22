@@ -7,31 +7,21 @@ public class changeSprite : MonoBehaviour
 {
 
 	public Color color;
-	public float height;
-	public float width;
+	public int height;
+	public int width;
 
-	public Sprite sprite1;
-	// Drag your first sprite here
-	public Sprite sprite2;
-	// Drag your second sprite here
+	public Sprite sprite1;	// Drag your first sprite here
+	public Sprite sprite2;	// Drag your second sprite here
 
 	//private SpriteRenderer spriteRenderer;
-
 	private UISprite spriteUI;
-
-
-
 
 	void Start ()
 	{
 
-		spriteUI = GetComponent<UISprite>();
+		spriteUI = GetComponent<UISprite> ();
 		spriteUI.spriteName = "image1";
 
-//		spriteRenderer = GetComponent<SpriteRenderer> (); // we are accessing the SpriteRenderer that is attached to the Gameobject
-//		if (spriteRenderer.sprite == null) { // if the sprite on spriteRenderer is null then
-//			spriteRenderer.sprite = sprite1; // set the sprite to sprite1
-//		}
 	}
 
 	void Update ()
@@ -45,7 +35,7 @@ public class changeSprite : MonoBehaviour
 	{
 		ReadFile ();
 
-		if (spriteUI.spriteName == "image1") { // if the spriteRenderer sprite = sprite1 then change to sprite2
+		if (spriteUI.spriteName == "image1") { // if the spriteRenderer sprite = sprite1 then change to sprite2 etc..
 			spriteUI.spriteName = "image2";
 		} else if (spriteUI.spriteName == "image2") {
 			spriteUI.spriteName = "image3";
@@ -70,19 +60,19 @@ public class changeSprite : MonoBehaviour
 
 
 			if (reader.IsStartElement ("width")) {
-				width = float.Parse (reader.GetAttribute ("value"));
+				width =  int.Parse (reader.GetAttribute ("value"));
 			}
 
 			if (reader.IsStartElement ("height")) {
-				height = float.Parse (reader.GetAttribute ("value"));
+				height = int.Parse (reader.GetAttribute ("value"));
 			}
 
 
 		}
+		Debug.Log ("width is: " + width + ". And height is " + height);
 
-
-				spriteUI.width = 160;
-				spriteUI.height = 270;
+		spriteUI.width = width;
+		spriteUI.height = height;
 	}
 
 	public void changeSpriteOnBtnClick ()
@@ -91,12 +81,14 @@ public class changeSprite : MonoBehaviour
 		ReadFile ();
 		//spriteRenderer.sprite = sprite1;
 		spriteUI.spriteName = "image2";
-//		Debug.Log ("ht is this: " + position);
+
 //		Debug.Log (color);
 //		spriteRenderer.color = Color.green;
 //		GetComponent<SpriteRenderer> ().color = Color.green;
 
 	}
 
-
+	public void writeToXml(){
+		Debug.Log ("gotcha");
+	}
 }
