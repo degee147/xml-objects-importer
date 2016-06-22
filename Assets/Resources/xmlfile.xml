@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<npcs>
-   <npc name="Mace" npcType="Barman" entries="3">
-      <width value="26">26</width>
-      <height value="27">27</height>
-   </npc>
-</npcs>

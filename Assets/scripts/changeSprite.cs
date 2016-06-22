@@ -20,12 +20,11 @@ public class changeSprite : MonoBehaviour
 
 	private UISprite spriteUI;
 
+
 	void Start ()
 	{
-
 		spriteUI = GetComponent<UISprite> ();
 		spriteUI.spriteName = "image1";
-
 	}
 
 	void Update ()
@@ -37,7 +36,7 @@ public class changeSprite : MonoBehaviour
 
 	void ChangeSprite ()
 	{
-		ReadFile ();
+		LoadFromXml ();
 
 		if (spriteUI.spriteName == "image1") { // if the spriteRenderer sprite = sprite1 then change to sprite2 etc..
 			spriteUI.spriteName = "image2";
@@ -51,60 +50,31 @@ public class changeSprite : MonoBehaviour
 	}
 
 
-	public void ReadFile ()
-	{
-		//can use get component to find the script and then find the value of the color attribute to get the colour 
-		//for now let's parse the xml to get the color
-
-
-		//readxml from xmlfile.xml in project folder (Same folder where Assets and Library are in the Editor)
-		XmlReader reader = XmlReader.Create ("Assets/Resources/xmlfile.xml");
-		//while there is data read it
-		while (reader.Read ()) {
-
-
-			if (reader.IsStartElement ("width")) {
-				width = int.Parse (reader.GetAttribute ("value"));
-			}
-
-			if (reader.IsStartElement ("height")) {
-				height = int.Parse (reader.GetAttribute ("value"));
-			}
-
-
-		}
-
-	}
-
 	public void changeSpriteOnBtnClick ()
 	{
-
 		LoadFromXml ();
-
 		spriteUI.spriteName = "image2";
-
-
 	}
 
 	public void LoadFromXml ()
 	{
-		string filepath = Application.dataPath + @"/Resources/gamexml.xml";
+		string filepath = Application.dataPath + @"/Resources/file.xml";
 		XmlDocument xmlDoc = new XmlDocument ();
 
 		if (File.Exists (filepath)) {
 			xmlDoc.Load (filepath);
 
-			XmlNodeList transformList = xmlDoc.GetElementsByTagName ("npc");
+			XmlNodeList transformList = xmlDoc.GetElementsByTagName ("values");
 
 			foreach (XmlNode transformInfo in transformList) {
 				XmlNodeList transformcontent = transformInfo.ChildNodes;
 
 				foreach (XmlNode transformItens in transformcontent) {
 					if (transformItens.Name == "width") {
-						width = int.Parse (transformItens.InnerText); // convert the strings to float and apply to the X variable.
+						width = int.Parse (transformItens.InnerText); // convert the strings to int and apply to the width variable.
 					}
 					if (transformItens.Name == "height") {
-						height = int.Parse (transformItens.InnerText); // convert the strings to float and apply to the Y variable.
+						height = int.Parse (transformItens.InnerText); // convert the strings to int and apply to the height variable.
 					}
 				}
 			}
@@ -119,8 +89,7 @@ public class changeSprite : MonoBehaviour
 
 	public void writeToXml ()
 	{
-
-		string filepath = Application.dataPath + @"/Resources/gamexml.xml";
+		string filepath = Application.dataPath + @"/Resources/file.xml";
 		XmlDocument xmlDoc = new XmlDocument ();
 
 		if (File.Exists (filepath)) {
@@ -128,24 +97,16 @@ public class changeSprite : MonoBehaviour
 			xmlDoc.Load (filepath);
 
 			XmlElement elmRoot = xmlDoc.DocumentElement;
+			elmRoot.RemoveAll (); // remove all inside the values node.
 
-			elmRoot.RemoveAll (); // remove all inside the transforms node.
+			XmlElement widthValue = xmlDoc.CreateElement ("width"); // create the width node.
+			widthValue.InnerText = spriteUI.width.ToString (); // apply to the node text the values of the variable.
 
-			XmlElement elmNew = xmlDoc.CreateElement ("rotation"); // create the rotation node.
+			XmlElement heightValue = xmlDoc.CreateElement ("height"); // create the width node.
+			heightValue.InnerText = spriteUI.height.ToString (); // apply to the node text the values of the variable.
 
-			XmlElement rotation_X = xmlDoc.CreateElement ("x"); // create the x node.
-			rotation_X.InnerText = spriteUI.width.ToString (); // apply to the node text the values of the variable.
-
-			XmlElement rotation_Y = xmlDoc.CreateElement ("y"); // create the y node.
-			rotation_Y.InnerText = spriteUI.width.ToString (); // apply to the node text the values of the variable.
-
-			XmlElement rotation_Z = xmlDoc.CreateElement ("z"); // create the z node.
-			rotation_Z.InnerText = spriteUI.width.ToString (); // apply to the node text the values of the variable.
-
-			elmNew.AppendChild (rotation_X); // make the rotation node the parent.
-			elmNew.AppendChild (rotation_Y); // make the rotation node the parent.
-			elmNew.AppendChild (rotation_Z); // make the rotation node the parent.
-			elmRoot.AppendChild (elmNew); // make the transform node the parent.
+			elmRoot.AppendChild (widthValue); // make the values node the parent.
+			elmRoot.AppendChild (heightValue); // make the values node the parent.
 
 			xmlDoc.Save (filepath); // save file.
 
