@@ -27,7 +27,8 @@ public class changeSprite : MonoBehaviour
 
 		spriteUI = GetComponent<UISprite>();
 		spriteUI.spriteName = "image3";
-//		spriteUI.width =
+		spriteUI.width = 575;
+		spriteUI.height = 775;
 
 //		spriteRenderer = GetComponent<SpriteRenderer> (); // we are accessing the SpriteRenderer that is attached to the Gameobject
 //		if (spriteRenderer.sprite == null) { // if the sprite on spriteRenderer is null then
