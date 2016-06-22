@@ -1,27 +1,30 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using System.Xml;
+using System.IO;
 
 
 public class changeSprite : MonoBehaviour
 {
 
-	public Color color;
+
 	public int height;
 	public int width;
 
-	public Sprite sprite1;	// Drag your first sprite here
-	public Sprite sprite2;	// Drag your second sprite here
+	public Sprite sprite1;
+	// Drag your first sprite here
+	public Sprite sprite2;
+	// Drag your second sprite here
 
-	//private SpriteRenderer spriteRenderer;
 	private UISprite spriteUI;
+
 
 	void Start ()
 	{
-
 		spriteUI = GetComponent<UISprite> ();
 		spriteUI.spriteName = "image1";
-
 	}
 
 	void Update ()
@@ -33,7 +36,7 @@ public class changeSprite : MonoBehaviour
 
 	void ChangeSprite ()
 	{
-		ReadFile ();
+		LoadFromXml ();
 
 		if (spriteUI.spriteName == "image1") { // if the spriteRenderer sprite = sprite1 then change to sprite2 etc..
 			spriteUI.spriteName = "image2";
@@ -47,48 +50,66 @@ public class changeSprite : MonoBehaviour
 	}
 
 
-	public void ReadFile ()
-	{
-		//can use get component to find the script and then find the value of the color attribute to get the colour 
-		//for now let's parse the xml to get the color
-
-
-		//readxml from xmlfile.xml in project folder (Same folder where Assets and Library are in the Editor)
-		XmlReader reader = XmlReader.Create ("Assets/Resources/xmlfile.xml");
-		//while there is data read it
-		while (reader.Read ()) {
-
-
-			if (reader.IsStartElement ("width")) {
-				width =  int.Parse (reader.GetAttribute ("value"));
-			}
-
-			if (reader.IsStartElement ("height")) {
-				height = int.Parse (reader.GetAttribute ("value"));
-			}
-
-
-		}
-		Debug.Log ("width is: " + width + ". And height is " + height);
-
-		spriteUI.width = width;
-		spriteUI.height = height;
-	}
-
 	public void changeSpriteOnBtnClick ()
 	{
-
-		ReadFile ();
-		//spriteRenderer.sprite = sprite1;
+		LoadFromXml ();
 		spriteUI.spriteName = "image2";
+	}
 
-//		Debug.Log (color);
-//		spriteRenderer.color = Color.green;
-//		GetComponent<SpriteRenderer> ().color = Color.green;
+	public void LoadFromXml ()
+	{
+		string filepath = Application.dataPath + @"/Resources/file.xml";
+		XmlDocument xmlDoc = new XmlDocument ();
+
+		if (File.Exists (filepath)) {
+			xmlDoc.Load (filepath);
+
+			XmlNodeList transformList = xmlDoc.GetElementsByTagName ("values");
+
+			foreach (XmlNode transformInfo in transformList) {
+				XmlNodeList transformcontent = transformInfo.ChildNodes;
+
+				foreach (XmlNode transformItens in transformcontent) {
+					if (transformItens.Name == "width") {
+						width = int.Parse (transformItens.InnerText); // convert the strings to int and apply to the width variable.
+					}
+					if (transformItens.Name == "height") {
+						height = int.Parse (transformItens.InnerText); // convert the strings to int and apply to the height variable.
+					}
+				}
+			}
+
+			Debug.Log ("width is: " + width + ". And height is " + height);
+
+			spriteUI.width = width;
+			spriteUI.height = height;
+		}
 
 	}
 
-	public void writeToXml(){
-		Debug.Log ("gotcha");
+	public void writeToXml ()
+	{
+		string filepath = Application.dataPath + @"/Resources/file.xml";
+		XmlDocument xmlDoc = new XmlDocument ();
+
+		if (File.Exists (filepath)) {
+
+			xmlDoc.Load (filepath);
+
+			XmlElement elmRoot = xmlDoc.DocumentElement;
+			elmRoot.RemoveAll (); // remove all inside the values node.
+
+			XmlElement widthValue = xmlDoc.CreateElement ("width"); // create the width node.
+			widthValue.InnerText = spriteUI.width.ToString (); // apply to the node text the values of the variable.
+
+			XmlElement heightValue = xmlDoc.CreateElement ("height"); // create the width node.
+			heightValue.InnerText = spriteUI.height.ToString (); // apply to the node text the values of the variable.
+
+			elmRoot.AppendChild (widthValue); // make the values node the parent.
+			elmRoot.AppendChild (heightValue); // make the values node the parent.
+
+			xmlDoc.Save (filepath); // save file.
+
+		}
 	}
 }
