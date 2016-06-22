@@ -15,16 +15,24 @@ public class changeSprite : MonoBehaviour
 	public Sprite sprite2;
 	// Drag your second sprite here
 
-	private SpriteRenderer spriteRenderer;
+	//private SpriteRenderer spriteRenderer;
+
+	private UISprite spriteUI;
 
 
 
 
 	void Start ()
 	{
-		spriteRenderer = GetComponent<SpriteRenderer> (); // we are accessing the SpriteRenderer that is attached to the Gameobject
-		if (spriteRenderer.sprite == null) // if the sprite on spriteRenderer is null then
-			spriteRenderer.sprite = sprite1; // set the sprite to sprite1
+
+		spriteUI = GetComponent<UISprite>();
+		spriteUI.spriteName = "image3";
+//		spriteUI.width =
+
+//		spriteRenderer = GetComponent<SpriteRenderer> (); // we are accessing the SpriteRenderer that is attached to the Gameobject
+//		if (spriteRenderer.sprite == null) { // if the sprite on spriteRenderer is null then
+//			spriteRenderer.sprite = sprite1; // set the sprite to sprite1
+//		}
 	}
 
 	void Update ()
@@ -38,12 +46,12 @@ public class changeSprite : MonoBehaviour
 	{
 		ReadFile ();
 
-		if (spriteRenderer.sprite == sprite1) { // if the spriteRenderer sprite = sprite1 then change to sprite2
-			spriteRenderer.sprite = sprite2;
-
-		} else {
-			spriteRenderer.sprite = sprite1; // otherwise change it back to sprite1
-		}
+//		if (spriteRenderer.sprite == sprite1) { // if the spriteRenderer sprite = sprite1 then change to sprite2
+//			spriteRenderer.sprite = sprite2;
+//
+//		} else {
+//			spriteRenderer.sprite = sprite1; // otherwise change it back to sprite1
+//		}
 	}
 
 
@@ -70,7 +78,7 @@ public class changeSprite : MonoBehaviour
 
 		}
 
-		spriteRenderer.transform.localScale = new Vector3 (width, height, 0);
+		//spriteRenderer.transform.localScale = new Vector3 (width, height, 0);
 //		spriteRenderer.transform.localScale = new Vector3 (1, 1, 0);
 
 	}
@@ -79,7 +87,7 @@ public class changeSprite : MonoBehaviour
 	{
 
 		ReadFile ();
-		spriteRenderer.sprite = sprite1;
+		//spriteRenderer.sprite = sprite1;
 
 //		Debug.Log ("ht is this: " + position);
 //		Debug.Log (color);
