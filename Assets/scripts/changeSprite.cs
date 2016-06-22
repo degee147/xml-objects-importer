@@ -10,20 +10,14 @@ public class changeSprite : MonoBehaviour
 	public float height;
 	public float width;
 
-	public Sprite sprite1;	// Drag your first sprite here
-	public Sprite sprite2;	// Drag your second sprite here
+	public Sprite sprite1;
+	// Drag your first sprite here
+	public Sprite sprite2;
+	// Drag your second sprite here
 
 	private SpriteRenderer spriteRenderer;
 
 
-	// npc data
-	public string npcName;
-	public string npcType;
-
-	// chat data
-	public int maxData;
-	public int showData;
-	public string[] data;
 
 
 	void Start ()
@@ -36,12 +30,14 @@ public class changeSprite : MonoBehaviour
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.Space)) { // If the space bar is pushed down
-			ChangeTheDamnSprite (); // call method to change sprite
+			ChangeSprite (); // call method to change sprite
 		}
 	}
 
-	void ChangeTheDamnSprite ()
+	void ChangeSprite ()
 	{
+		ReadFile ();
+
 		if (spriteRenderer.sprite == sprite1) { // if the spriteRenderer sprite = sprite1 then change to sprite2
 			spriteRenderer.sprite = sprite2;
 
@@ -51,22 +47,10 @@ public class changeSprite : MonoBehaviour
 	}
 
 
-	public void changeSpriteOnBtnClick ()
+	public void ReadFile ()
 	{
-
-//		Debug.Log ("Im here");
-
-	
 		//can use get component to find the script and then find the value of the color attribute to get the colour 
 		//for now let's parse the xml to get the color
-
-
-		// initialise data
-		maxData = 0;
-		showData = 0;
-		npcName = "unset";
-		npcName = "unset";
-		data = null;
 
 
 		//readxml from xmlfile.xml in project folder (Same folder where Assets and Library are in the Editor)
@@ -83,24 +67,23 @@ public class changeSprite : MonoBehaviour
 				height = float.Parse (reader.GetAttribute ("value"));
 			}
 
-		
 
-			Debug.Log ("width is " + width);
-			Debug.Log ("height is " + height);
 		}
- 
+
 		spriteRenderer.transform.localScale = new Vector3 (width, height, 0);
+
+	}
+
+	public void changeSpriteOnBtnClick ()
+	{
+
+		ReadFile ();
+		spriteRenderer.sprite = sprite1;
 
 //		Debug.Log ("ht is this: " + position);
 //		Debug.Log (color);
 //		spriteRenderer.color = Color.green;
 //		GetComponent<SpriteRenderer> ().color = Color.green;
-
-		if (spriteRenderer.sprite == sprite1) { // if the spriteRenderer sprite = sprite1 then change to sprite2
-			spriteRenderer.sprite = sprite2;
-		} else {
-			spriteRenderer.sprite = sprite1; // otherwise change it back to sprite1
-		}
 
 	}
 
