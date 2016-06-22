@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
- <Test Name="Test" Position="1.0, 2.0, 3.0">
- </Test>
+<parameters>
+	<height>150</height>
+	<width>140</width>
+	<color>Speach bubble 3</color>
+</parameters> 
