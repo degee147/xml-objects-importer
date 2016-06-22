@@ -5,7 +5,7 @@ using System.Xml;
 
 public class changeSprite : MonoBehaviour
 {
-	//	[System.Serializable]
+
 	public Color color;
 	public float height;
 	public float width;
@@ -26,9 +26,7 @@ public class changeSprite : MonoBehaviour
 	{
 
 		spriteUI = GetComponent<UISprite>();
-		spriteUI.spriteName = "image3";
-		spriteUI.width = 575;
-		spriteUI.height = 775;
+		spriteUI.spriteName = "image1";
 
 //		spriteRenderer = GetComponent<SpriteRenderer> (); // we are accessing the SpriteRenderer that is attached to the Gameobject
 //		if (spriteRenderer.sprite == null) { // if the sprite on spriteRenderer is null then
@@ -47,12 +45,15 @@ public class changeSprite : MonoBehaviour
 	{
 		ReadFile ();
 
-//		if (spriteRenderer.sprite == sprite1) { // if the spriteRenderer sprite = sprite1 then change to sprite2
-//			spriteRenderer.sprite = sprite2;
-//
-//		} else {
-//			spriteRenderer.sprite = sprite1; // otherwise change it back to sprite1
-//		}
+		if (spriteUI.spriteName == "image1") { // if the spriteRenderer sprite = sprite1 then change to sprite2
+			spriteUI.spriteName = "image2";
+		} else if (spriteUI.spriteName == "image2") {
+			spriteUI.spriteName = "image3";
+		} else if (spriteUI.spriteName == "image3") {
+			spriteUI.spriteName = "image4";
+		} else if (spriteUI.spriteName == "image4") {
+			spriteUI.spriteName = "image1";
+		}
 	}
 
 
@@ -79,9 +80,9 @@ public class changeSprite : MonoBehaviour
 
 		}
 
-		//spriteRenderer.transform.localScale = new Vector3 (width, height, 0);
-//		spriteRenderer.transform.localScale = new Vector3 (1, 1, 0);
 
+				spriteUI.width = 160;
+				spriteUI.height = 270;
 	}
 
 	public void changeSpriteOnBtnClick ()
@@ -89,7 +90,7 @@ public class changeSprite : MonoBehaviour
 
 		ReadFile ();
 		//spriteRenderer.sprite = sprite1;
-
+		spriteUI.spriteName = "image2";
 //		Debug.Log ("ht is this: " + position);
 //		Debug.Log (color);
 //		spriteRenderer.color = Color.green;
