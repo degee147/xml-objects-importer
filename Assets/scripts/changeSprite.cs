@@ -70,8 +70,8 @@ public class changeSprite : MonoBehaviour
 
 		}
 
-//		spriteRenderer.transform.localScale = new Vector3 (width, height, 0);
-		spriteRenderer.transform.localScale = new Vector3 (1, 1, 0);
+		spriteRenderer.transform.localScale = new Vector3 (width, height, 0);
+//		spriteRenderer.transform.localScale = new Vector3 (1, 1, 0);
 
 	}
 
