@@ -8,9 +8,7 @@ public class changeSprite : MonoBehaviour
 	//	[System.Serializable]
 	public Color color;
 	public float height;
-	public string height2;
 	public float width;
-	public string width2;
 
 	public Sprite sprite1;	// Drag your first sprite here
 	public Sprite sprite2;	// Drag your second sprite here
@@ -78,17 +76,17 @@ public class changeSprite : MonoBehaviour
 
 
 			if (reader.IsStartElement ("width")) {
-				width2 = reader.GetAttribute ("value");
+				width = float.Parse (reader.GetAttribute ("value"));
 			}
 
 			if (reader.IsStartElement ("height")) {
-				height2 = reader.GetAttribute ("value");
+				height = float.Parse (reader.GetAttribute ("value"));
 			}
 
 		
 
-			Debug.Log ("width is " + width2);
-			Debug.Log ("height is " + height2);
+			Debug.Log ("width is " + width);
+			Debug.Log ("height is " + height);
 		}
  
 		spriteRenderer.transform.localScale = new Vector3 (width, height, 0);
